@@ -1,11 +1,20 @@
+import { getBookById, formatDate } from "@/lib/books";
+
 export default function MeditationsPost() {
+  const book = getBookById("meditations");
+
   return (
     <article>
       {/* Post Header */}
       <header className="post-header">
-        <p className="post-meta">Marcus Aurelius • Stoicism</p>
-        <h1 className="post-title">Meditations</h1>
-        <p className="post-author">By Marcus Aurelius</p>
+        <p className="post-meta">
+          {book?.author} • {book?.topic}
+        </p>
+        <h1 className="post-title">{book?.title}</h1>
+        <p className="post-author">By {book?.author}</p>
+        {book && (
+          <p className="post-date">{formatDate(book.createdAt)}</p>
+        )}
       </header>
 
       {/* Post Content */}
